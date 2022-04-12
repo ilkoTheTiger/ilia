@@ -1,0 +1,8 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+        <ul>{{ object.bookings }}</ul>
+        <ul>{{ object.flight_code }}</ul>
+        <ul>{{ object.flight_from }}-{{ flight.flight_to }}</ul>
+        <ul>{{ object.flight_time }}</ul>
+        <ul>{{ object.flight_cost|floatformat:2 }} BGN</ul>
+{% endblock %}

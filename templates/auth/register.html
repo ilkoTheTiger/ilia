@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+<form action="{% url 'register user' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    {{ profile_form }}
+        <button class="mdc-button foo-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Register</span>
+        </button>
+</form>
+{% endblock %}
+{% block js_plugins %}
+{% endblock %}
