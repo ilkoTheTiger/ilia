@@ -1,1 +1,1 @@
-web:gunicorn --pythonpath timetofly timetofly.wsgi
+web: gunicorn --pythonpath TimeToFly.wsgi
