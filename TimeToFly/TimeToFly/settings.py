@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-jwh*$^%9txu(2-$2^%o#j@m$-roab4%1up^3ia%^njx(o49+kd
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
+    'https://timetofly-project.herokuapp.com/',
 ]
 
 
