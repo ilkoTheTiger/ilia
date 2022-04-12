@@ -1,1 +1,1 @@
-web: gunicorn ilkothetiger.wsgi
+web: gunicorn TimeToFly.wsgi
