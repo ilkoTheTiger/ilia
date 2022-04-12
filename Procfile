@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath TimeToFly.TimeToFly.wsgi
+web: gunicorn -b 127.0.0.1:8000 TimeToFly TimeToFly.wsgi
