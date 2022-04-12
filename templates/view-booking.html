@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    <form method="post" action="{% url 'view flight' object.pk %}">
+
+                    <h1><div class="flights-list" >
+                            <li><p>Flight Number: {{ flight.flight_number }}</p></li>
+                                                    <li ><p>Code: {{ flight.flight_code }}</p></li>
+                                                    <li><p> {{ flight.flight_from }}
+                                                    to {{ flight.flight_to }}</p></li>
+                                                    <li><p> Departure:: {{ flight.flight_time }}</p></li>
+                                                    <li><p>Ticket Price: {{ flight.flight_cost|floatformat:2 }} BGN</p></li>
+                {% if request.user.is_authenticated %}
+                        <ul><li class="green">(<a href="{% url 'update flight' flight.flight_number %}">Edit Flight</a>)</li>
+        <li class="red">(<a href="{% url 'delete flight' flight.flight_number %}">Delete Flight</a>)</li></ul></div>
+    </h1>{% endif %}
+    </form>
+{% endblock %}

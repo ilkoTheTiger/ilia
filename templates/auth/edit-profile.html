@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    <form method="POST" action="{% url 'edit profile' object.pk %}" enctype="multipart/form-data">
+        {% if is_owner %}
+            {% csrf_token %}
+            {{ form }}
+
+
+        {% else %}
+            <h1>You can not edit someone else's Profile!</h1>
+        {% endif %}
+    </form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+    <div class="background"">
+        <div class="home">
+
+            {% if request.user.is_authenticated %}<h1>
+                <h1>You are logged in as, {{ request.user }}</h1>
+    <h1><a href="{% url 'show profile' request.user.pk %}">Go to Profile</a>
+    <a href="{% url 'show flights' %}">View Flights</a></h1>
+            {% else %}
+                <h1>Welcome to Time to Fly!</h1>
+                    <h1><a href="{% url 'login user'  %}">Log In</a>
+    <a href="{% url 'register user' %}">Create an Account</a></h1>
+        {% endif %}
+    </div>
+        <img width="100%" class='index' src="{% static 'images/timeToFly_.jpg' %}" alt="Background-image">
+    </div>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    <form method="post" action="{% url 'create flight' %}">
+        {% csrf_token %}
+        {{ form }}
+        <p>
+        <button>Create Flight</button>
+    </form>
+{% endblock %}
