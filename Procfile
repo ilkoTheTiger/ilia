@@ -1,1 +1,1 @@
-web: gunicorn demo_app.wsgi
+web: gunicorn TimeToFly.wsgi
