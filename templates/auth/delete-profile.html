@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    <form method="POST" action="{% url 'delete profile' object.pk %}" enctype="multipart/form-data">
+        {% if is_owner %}
+            {% csrf_token %}
+            {{ form }}
+                    <h1><p>Are you sure you want to delete your profile?</p><button class="mdc-button foo-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Delete My Profile</span>
+        </button></h1>
+        {% else %}
+             <h1>You can not delete someone else's Profile!</h1>
+        {% endif %}
+    </form>
+{% endblock %}

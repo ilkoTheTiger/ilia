@@ -1,0 +1,7 @@
+{
+  "name": "TimeToFly",
+  "version": "1.0.0",
+  "dependencies": {
+    "@material/tab-bar": "^13.0.0"
+  }
+}
