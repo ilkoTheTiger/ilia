@@ -68,7 +68,7 @@ class ShowProfileView(auth_mixins.LoginRequiredMixin, views.DetailView):
 
 class EditProfileView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Profile
-    fields = ('first_name', 'last_name', 'image', 'age', 'passport')
+    fields = ('first_name', 'last_name', 'age', 'passport', 'image')
     success_url = reverse_lazy('show index')
     template_name = 'auth/edit-profile.html'
     def get_context_data(self, **kwargs):

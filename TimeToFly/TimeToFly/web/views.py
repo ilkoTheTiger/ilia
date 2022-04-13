@@ -52,8 +52,12 @@ class ChooseFlightView(auth_mixins.LoginRequiredMixin, views.CreateView):
 class CreateFlightView(auth_mixins.LoginRequiredMixin, views.CreateView):
     model = Flight
     template_name = 'create-flight.html'
-    fields = '__all__'
+    fields = ('flight_number', 'flight_code', 'flight_from', 'flight_to', 'flight_cost', 'flight_time',)
     success_url = reverse_lazy('show flights')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
     # def get_form(self, form_class=None):
     #     if form_class is None:
@@ -72,6 +76,15 @@ class EditFlightView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     context_object_name = 'flight'
     success_url = reverse_lazy('show flights')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        author_of = Flight.objects.filter(user=self.request.user)
+        context['is_author'] = False
+        for flight in author_of:
+            if self.object == flight:
+                context['is_author'] = True
+        return  context
+
 
 class DeleteFlightView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Flight
@@ -80,8 +93,29 @@ class DeleteFlightView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     context_object_name = 'flight'
     success_url = reverse_lazy('show flights')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        author_of = Flight.objects.filter(user=self.request.user)
+        context['is_author'] = False
+        for flight in author_of:
+            if self.object == flight:
+                context['is_author'] = True
+        return  context
+
+
+
 
 class CurrentFlightView(views.DetailView):
     model = Flight
     template_name = 'view-booking.html'
     context_object_name = 'flight'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        author_of = Flight.objects.filter(user=self.request.user)
+        context['is_author'] = False
+        for flight in author_of:
+            if self.object == flight:
+                context['is_author'] = True
+        return  context
+

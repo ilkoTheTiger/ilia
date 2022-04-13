@@ -64,6 +64,11 @@ class Flight(models.Model):
 
     flight_time = models.DateTimeField()
 
+    user = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+    )
+
     class Meta:
         ordering = ['flight_number']
 

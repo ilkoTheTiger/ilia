@@ -8,7 +8,7 @@
                                                     to {{ flight.flight_to }}</p>
                                                    <p> Departure:: {{ flight.flight_time }}</p>
                                                     <p>Ticket Price: {{ flight.flight_cost|floatformat:2 }} BGN</p>
-                {% if request.user.is_authenticated %}
+                {% if is_author %}
                                                       <a href="{% url 'update flight' flight.pk %}"><button class="mdc-button foo-button">
             <div class="mdc-button__ripple"></div>
             <span class="mdc-button__label">Edit Flight</span></button></a>
