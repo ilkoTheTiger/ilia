@@ -176,8 +176,8 @@ ul.flights-list li.green {
     -moz-box-shadow: 13px 21px 60px -9px rgba(0, 0, 0, 0.75);
     box-shadow: 13px 21px 60px -9px rgba(0, 0, 0, 0.75);
     border-radius: 7px;
-    padding: 30px;
-    background: white;
+    padding: 20px;
+    background: #ffffff;
 }
 
 .flight-container h2 {

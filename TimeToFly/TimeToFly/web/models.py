@@ -4,6 +4,7 @@ from django.contrib import admin
 from TimeToFly.auth_app.models import AppUser
 from django.core.exceptions import ValidationError
 
+
 class Town(models.Model):
 
     TOWN_MAX_LEN = 187
@@ -70,15 +71,16 @@ class Flight(models.Model):
         return self.flight_code
 
 class Passenger(models.Model):
+    SELECTED_MAX_LEN = 287
     user = models.OneToOneField(
         AppUser,
         on_delete=models.CASCADE,
         primary_key=True
     )
 
-
     bookings = models.ManyToManyField(
         Flight,
+        verbose_name="Available Flights"
     )
 
     def __str__(self):

@@ -1,23 +1,28 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
 
-
+    {% if request.user.is_authenticated %}
     <div class="flight-summary">
-                    <ul class="float-list">{% if request.user %}<h1>
-    <h1><a href="{% url 'create flight' %}">Add Flight</a>
-    {% endif %}</ul>
+                    <ul class="float-list"><h1>
+    <h1>                                                           <a href="{% url 'create flight' %}"><button class="mdc-button foo-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Add Flight</span>
+        </button></a></h1>
+    </ul>{% endif %}
         {% for flight in page_obj %}
             <ul class="flights-list">
-        <li>{{ flight.flight_number }}</li>
         <li>{{ flight.flight_code }}</li>
         <li>{{ flight.flight_from }}-{{ flight.flight_to }}</li>
         <li>{{ flight.flight_time }}</li>
         <li>{{ flight.flight_cost|floatformat:2 }} BGN</li>
-                <li class="blue">(<a href="{% url 'view flight' flight.flight_number %}">View Flight</a>)</li>
-                {% if request.user.is_authenticated %}
-                <li class="green">(<a href="{% url 'update flight' flight.flight_number %}">Edit Flight</a>)</li>
-                    <li class="red">(<a href="{% url 'delete flight' flight.flight_number %}">Delete Flight</a>)</li>
-            {% endif %}
+
+                <li><a href="{% url 'view flight' flight.flight_number %}"><button class="mdc-button foo-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">View Flight</span></button></a><li/>
+{#                {% if request.user.is_authenticated and request.user.is_staff %}#}
+{#                <li class="green">(<a href="{% url 'update flight' flight.flight_number %}">Edit Flight</a>)</li>#}
+{#                    <li class="red">(<a href="{% url 'delete flight' flight.flight_number %}">Delete Flight</a>)</li>#}
+{#            {% endif %}#}
             </ul>
             <hr>
         {% endfor %}

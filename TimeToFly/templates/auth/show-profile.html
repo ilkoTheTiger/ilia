@@ -11,10 +11,21 @@
     <h1>{{ object.first_name }}
     {{ object.last_name }}
     {{ object.email }}</h1>
+    {% if object.age %}
+    <h1>Age: {{ object.age }}</h1>
+    {% endif %}
     <p>
         {% if is_owner %}<h1>
-    <a href="{% url 'edit profile' request.user.pk %}">Edit Profile</a><p>
-    <a href="{% url 'delete profile' request.user.pk %}">Delete Profile</a></h1>
+   <a href="{% url 'edit profile' request.user.pk %}">                       <button class="mdc-button foo-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label"> Edit Profile</span>
+        </button></a>
+                           <a href="{% url 'delete profile' request.user.pk %}"><button class="mdc-button foo-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">    Delete Profile</h1></span>
+        </button></a>
+
+
         {% endif %}
     </div>
 {% endblock %}

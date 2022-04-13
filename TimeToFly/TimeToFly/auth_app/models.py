@@ -7,6 +7,9 @@ from TimeToFly.auth_app.managers import AppUsersManager
 from TimeToFly.web.validators import MaxFileSize
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.core.validators import MinValueValidator, MinLengthValidator
+from django.core.validators import deconstructible, ValidationError, MaxValueValidator
+
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
@@ -14,6 +17,7 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         unique=True,
         null=False,
         blank=False,
+
     )
 
     is_staff = models.BooleanField(
@@ -23,26 +27,50 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     date_joined = models.DateTimeField(
         auto_now_add=True,
     )
+    
 
     USERNAME_FIELD = 'email'
 
     objects = AppUsersManager()
 
 
-
 class Profile(models.Model):
     FIRST_NAME_MAX_LEN = 25
+    FIRST_NAME_MIN_LEN = 2
     LAST_NAME_MAX_LEN = 25
+    LAST_NAME_MIN_LEN = 2
+    AGE_MIN_VALUE=18
+    PASSPORT_MIN_VALUE=100000000
+    PASSPORT_ID_TOO_LONG_VALUE  = 999999999
 
     IMAGE_UPLOAD_DIR = 'images/'
     MAX_FILE_SIZE_IN_MEGABYTES = 5
 
+
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LEN,
+        validators=(MinLengthValidator(FIRST_NAME_MIN_LEN),
+    ),
     )
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LEN,
+        validators=(MinLengthValidator(LAST_NAME_MIN_LEN),
+    ),
+    )
+
+    age = models.IntegerField(
+        validators=(MinValueValidator(AGE_MIN_VALUE),),
+        null=True,
+        blank=True,
+    )
+
+    passport = models.IntegerField(
+        validators=(MinValueValidator(PASSPORT_MIN_VALUE, message = ("Ensure your Passport ID is 9 digits.")),
+                    MaxValueValidator(PASSPORT_ID_TOO_LONG_VALUE, message = ("Ensure your Passport ID is 9 digits.")),
+                    ),
+        null=True,
+        blank=True,
     )
 
     image = models.ImageField(

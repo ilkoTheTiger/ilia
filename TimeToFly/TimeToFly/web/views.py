@@ -36,6 +36,14 @@ class ChooseFlightView(auth_mixins.LoginRequiredMixin, views.CreateView):
     fields = ('bookings',)
     success_url = reverse_lazy('show flights')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        passenger = Passenger.objects.filter(user_id=self.request.user.id)
+        context['is_passenger'] = False
+        if passenger:
+            context['is_passenger'] = True
+        return  context
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
@@ -46,6 +54,15 @@ class CreateFlightView(auth_mixins.LoginRequiredMixin, views.CreateView):
     template_name = 'create-flight.html'
     fields = '__all__'
     success_url = reverse_lazy('show flights')
+
+    # def get_form(self, form_class=None):
+    #     if form_class is None:
+    #         form_class = self.get_form_class()
+    #
+    #     form = super(CreateFlightView, self).get_form(form_class)
+    #     for _, field in form.fields.items():
+    #         form.fields[field].widget.attrs = {'placeholder': 'Your placeholder'}
+    #     return form
 
 
 class EditFlightView(auth_mixins.LoginRequiredMixin, views.UpdateView):

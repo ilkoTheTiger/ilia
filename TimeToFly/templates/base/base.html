@@ -29,7 +29,9 @@
         <li class="right"><a href="{% url 'register user' %}">Register</a>
         <a href="{% url 'login user' %}">Login</a></li>
     {% else %}
-        <li class="right"><a href="{% url 'book flight' %}">Choose Flight</a>
+         <li class="right">
+        <a href="{% url 'book flight' %}">Choose Flight</a>
+
 {#            <a href="{% url 'my flights' %}">My Bookings</a>#}
             <a href="{% url 'logout user' %}">Logout</a>
         <a href="{% url 'show profile' request.user.pk %}">Profile</a></li>

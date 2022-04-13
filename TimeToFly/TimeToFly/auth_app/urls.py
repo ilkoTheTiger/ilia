@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from TimeToFly.auth_app.views import UserRegistrationView, UserLoginView, UserLogoutView, EditProfileView, ShowProfileView, DeleteProfileView
 
 urlpatterns = (

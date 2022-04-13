@@ -2,13 +2,18 @@
 {% block page_content %}
     <form method="post" action="{% url 'book flight' %}">
         {% csrf_token %}
+        {% if not is_passenger %}
         {{ form }}
+                    <button class="mdc-button foo-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">Choose Flight</span>
+        </button>
+        {% else %}
+            <h1>You've selected your flight, our team is going to contact you soon.</h1>
+        {% endif %}
         <p>
 {#        <button>Book</button>#}
-        <button class="mdc-button foo-button">
-            <div class="mdc-button__ripple"></div>
-            <span class="mdc-button__label">Save</span>
-        </button>
+
 
     </form>
 {% endblock %}

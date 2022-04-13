@@ -5,6 +5,11 @@
             {% csrf_token %}
             {{ form }}
 
+                                       <button class="mdc-button foo-button">
+            <div class="mdc-button__ripple"></div>
+            <span class="mdc-button__label">    Save</span>
+        </button>
+
 
         {% else %}
             <h1>You can not edit someone else's Profile!</h1>
