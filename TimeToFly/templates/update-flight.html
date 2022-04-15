@@ -3,6 +3,7 @@
 
     <form method="post" action="{% url 'update flight' object.pk %}">
         {% if is_author %}
+            {% if can_edit_flights %}
         {% csrf_token %}
         {{ form }}
                 <p>
@@ -10,7 +11,11 @@
             <div class="mdc-button__ripple"></div>
             <span class="mdc-button__label">Save</span>
         </button>
-    {% else %}
+            {% else %}
+                    <h1>You do not have permissions to make changes to flight with code: {{ flight }}.</h1>
+            {% endif %}
+
+        {% else %}
     <h1>You cannot make changes to flight with code: {{ flight }}, as you are not the author</h1>
     {% endif %}
     </form>

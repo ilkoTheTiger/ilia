@@ -3,11 +3,12 @@
 
     {% if request.user.is_authenticated %}
     <div class="flight-summary">
+        {% if can_add_flights %}
                     <ul class="float-list"><h1>
     <h1>                                                           <a href="{% url 'create flight' %}"><button class="mdc-button foo-button">
             <div class="mdc-button__ripple"></div>
             <span class="mdc-button__label">Add Flight</span>
-        </button></a></h1>
+        </button></a></h1>{% endif %}
     </ul>{% endif %}
         {% for flight in page_obj %}
             <ul class="flights-list">

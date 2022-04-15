@@ -2,12 +2,15 @@
 {% block page_content %}
     <form method="post" action="{% url 'delete flight' object.pk %}">
         {% if is_author %}
+            {% if can_delete_flights %}
         {% csrf_token %}
         <h1>Confirm you want to delete the flight              <p>
         <button class="mdc-button foo-button">
             <div class="mdc-button__ripple"></div>
             <span class="mdc-button__label">Delete</span>
-        </button></h1>
+        </button></h1>{% else %}
+                 <h1>You do not have permissions to delete flight with code: {{ flight }}.</h1>
+                {% endif %}
     {% else %}
     <h1>You cannot delete flight with code: {{ flight }}, as you are not the author</h1>
     {% endif %}

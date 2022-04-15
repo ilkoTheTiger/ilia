@@ -1,12 +1,15 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
     <form method="post" action="{% url 'create flight' %}">
+        {% if can_add_flights %}
         {% csrf_token %}
         {{ form }}
         <p>
                                        <button class="mdc-button foo-button">
             <div class="mdc-button__ripple"></div>
             <span class="mdc-button__label">    Create Flight</span>
-        </button>
+        </button>{% else %}
+    <h1>You do not have permissions to add new flights</h1>
+    {% endif %}
     </form>
 {% endblock %}

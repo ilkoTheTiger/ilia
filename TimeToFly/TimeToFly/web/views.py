@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from TimeToFly.web.models import Flight, Passenger
 from TimeToFly.auth_app.models import AppUser
 from django.shortcuts import redirect
+from django.core.exceptions import ValidationError
 
 
 class IndexView(views.TemplateView):
@@ -28,6 +29,11 @@ class FlightsListView(views.ListView):
     paginate_by = 5
     model = Flight
     template_name = 'flights-list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['can_add_flights'] = self.request.user.has_perm('web.create_flight')
+        return context
 
 
 class ChooseFlightView(auth_mixins.LoginRequiredMixin, views.CreateView):
@@ -59,6 +65,12 @@ class CreateFlightView(auth_mixins.LoginRequiredMixin, views.CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['can_add_flights'] = self.request.user.has_perm('web.create_flight')
+        return context
+
+
     # def get_form(self, form_class=None):
     #     if form_class is None:
     #         form_class = self.get_form_class()
@@ -83,6 +95,8 @@ class EditFlightView(auth_mixins.LoginRequiredMixin, views.UpdateView):
         for flight in author_of:
             if self.object == flight:
                 context['is_author'] = True
+
+        context['can_edit_flights'] = self.request.user.has_perm('web.change_flight')
         return  context
 
 
@@ -100,6 +114,7 @@ class DeleteFlightView(auth_mixins.LoginRequiredMixin, views.DeleteView):
         for flight in author_of:
             if self.object == flight:
                 context['is_author'] = True
+        context['can_delete_flights'] = self.request.user.has_perm('web.delete_flight')
         return  context
 
 
@@ -118,4 +133,5 @@ class CurrentFlightView(views.DetailView):
             if self.object == flight:
                 context['is_author'] = True
         return  context
+
 

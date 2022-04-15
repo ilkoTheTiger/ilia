@@ -88,6 +88,9 @@ class Profile(models.Model):
         primary_key=True,
     )
 
+    def __str__(self):
+        return self.user.email
+
 
 @receiver(post_delete, sender=Profile)
 def auto_delete_user_with_profile(sender, instance, **kwargs):

@@ -51,9 +51,18 @@ class Flight(models.Model):
         choices=((choice.town, choice.town) for choice in Town.objects.all()),
     )
 
+    user = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+    )
+
     def clean(self):
         if self.flight_from == self.flight_to:
             raise ValidationError('Flight From must be different than Flight To.')
+        #
+        # if not AppUser.user.has_perm('web.create_flight'):
+        #     raise ValidationError('Only suppliers can add new Flights')
+
 
     flight_cost = models.FloatField(
         default=DEFAULT_FLIGHT_PRICE,
@@ -64,10 +73,7 @@ class Flight(models.Model):
 
     flight_time = models.DateTimeField()
 
-    user = models.ForeignKey(
-        AppUser,
-        on_delete=models.CASCADE,
-    )
+
 
     class Meta:
         ordering = ['flight_number']
