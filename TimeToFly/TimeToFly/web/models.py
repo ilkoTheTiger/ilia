@@ -1,8 +1,8 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MinValueValidator
-from django.contrib import admin
 from TimeToFly.auth_app.models import AppUser
 from django.core.exceptions import ValidationError
+# from TimeToFly.web.validators import MinDateValidator
 
 
 class Town(models.Model):
@@ -98,19 +98,19 @@ class Passenger(models.Model):
         return str(self.user)
 
 
-class Booking(models.Model):
-    user = models.ForeignKey(
-        AppUser,
-        on_delete=models.CASCADE,
-    )
-
-    depart_from = models.CharField(
-        max_length=25
-    )
-
-    to = models.CharField(
-        max_length=25
-    )
-
-    date = models.DateTimeField()
+# class Booking(models.Model):
+#     user = models.ForeignKey(
+#         AppUser,
+#         on_delete=models.CASCADE,
+#     )
+#
+#     depart_from = models.CharField(
+#         max_length=25
+#     )
+#
+#     to = models.CharField(
+#         max_length=25
+#     )
+#
+#     date = models.DateTimeField()
 

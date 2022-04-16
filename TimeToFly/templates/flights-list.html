@@ -21,8 +21,8 @@
             <div class="mdc-button__ripple"></div>
             <span class="mdc-button__label">View Flight</span></button></a><li/>
 {#                {% if request.user.is_authenticated and request.user.is_staff %}#}
-{#                <li class="green">(<a href="{% url 'update flight' flight.flight_number %}">Edit Flight</a>)</li>#}
-{#                    <li class="red">(<a href="{% url 'delete flight' flight.flight_number %}">Delete Flight</a>)</li>#}
+{#                <li >(<a href="{% url 'update flight' flight.flight_number %}">Edit Flight</a>)</li>#}
+{#                    <li >(<a href="{% url 'delete flight' flight.flight_number %}">Delete Flight</a>)</li>#}
 {#            {% endif %}#}
             </ul>
             <hr>

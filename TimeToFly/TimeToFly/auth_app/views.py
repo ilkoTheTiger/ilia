@@ -1,11 +1,10 @@
 from django.contrib.auth import views as auth_views
-from django.contrib.auth import models as auth_models
 from django.contrib.auth import mixins as auth_mixins
 from django.contrib.auth import forms as auth_forms, get_user_model
 from django.views import generic as views
 from django.urls import reverse_lazy
 from django.contrib.auth import login, logout
-from TimeToFly.auth_app.models import Profile, AppUser
+from TimeToFly.auth_app.models import Profile
 from django import forms
 
 UserModel = get_user_model()

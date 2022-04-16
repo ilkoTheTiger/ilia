@@ -1,14 +1,12 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.contrib.auth import models as auth_models
 # from django.core.validators import MinValueValidator
 # from django.core.exceptions import ValidationError
 from TimeToFly.auth_app.managers import AppUsersManager
-from TimeToFly.web.validators import MaxFileSize
+from TimeToFly.web.validators import MaxFileSize, validate_only_letters
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
-from django.core.validators import MinValueValidator, MinLengthValidator
-from django.core.validators import deconstructible, ValidationError, MaxValueValidator
+from django.core.validators import MinValueValidator, MinLengthValidator, MaxValueValidator, ValidationError
 
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -50,12 +48,14 @@ class Profile(models.Model):
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LEN,
         validators=(MinLengthValidator(FIRST_NAME_MIN_LEN),
+                    validate_only_letters,
     ),
     )
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LEN,
         validators=(MinLengthValidator(LAST_NAME_MIN_LEN),
+                    validate_only_letters,
     ),
     )
 

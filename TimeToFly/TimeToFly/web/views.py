@@ -2,9 +2,6 @@ from django.contrib.auth import mixins as auth_mixins
 from django.views import generic as views
 from django.urls import reverse_lazy
 from TimeToFly.web.models import Flight, Passenger
-from TimeToFly.auth_app.models import AppUser
-from django.shortcuts import redirect
-from django.core.exceptions import ValidationError
 
 
 class IndexView(views.TemplateView):
@@ -32,7 +29,7 @@ class FlightsListView(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['can_add_flights'] = self.request.user.has_perm('web.create_flight')
+        context['can_add_flights'] = self.request.user.has_perm('web.add_flight')
         return context
 
 
@@ -67,7 +64,7 @@ class CreateFlightView(auth_mixins.LoginRequiredMixin, views.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['can_add_flights'] = self.request.user.has_perm('web.create_flight')
+        context['can_add_flights'] = self.request.user.has_perm('web.add_flight')
         return context
 
 
