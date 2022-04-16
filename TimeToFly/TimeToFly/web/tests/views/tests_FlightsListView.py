@@ -17,13 +17,13 @@ class FlightTest(DTestCase):
         'pk': 1,
     }
 
-    def test_get_renders_correct_template(self):
+    def test_get_show_flights_renders_correct_template(self):
         response = self.client.get(reverse('show flights'))
 
         self.assertTemplateUsed(response, 'flights-list.html')
 
     def test_get__when_3_flights__expect_context_to_contain_3_flights(self):
-        profile = AppUser(email='ilkothetiger@gmail.com', password='nemaDat1kaj@')
+        profile = AppUser(email='ilkothetiger@gmail.com', password='nemaDat1kaj@', id=1)
         profile.save()
 
         flights_to_create = (

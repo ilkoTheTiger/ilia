@@ -13,6 +13,9 @@ class Town(models.Model):
         max_length=TOWN_MAX_LEN,
     )
 
+    class Meta:
+        ordering = ['town']
+
     def __str__(self):
         return self.town
 

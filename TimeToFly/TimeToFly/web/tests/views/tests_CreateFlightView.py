@@ -12,17 +12,4 @@ class CreateFlightTests(DTestCase):
 
         Flight(1, 'ABCDEF', "Sofia", 'London', 1, 300, django.utils.timezone.now())
 
-        response = self.client.get(reverse('create flight'))
-
         self.assertIsNotNone(Flight.objects.all())
-
-    def test_check_if_flight_recognizes_author__expect_success(self):
-        profile = AppUser(email='ilkothetiger@gmail.com', password='nemaDat1kaj@')
-        profile.save()
-
-        flight = Flight(1, 'ABCDEF', "Sofia", 'London', 1, 300, django.utils.timezone.now())
-        flight.save()
-
-        response = self.client.get(reverse('create flight'))
-
-        self.assertEqual    (1, flight.user_id)
