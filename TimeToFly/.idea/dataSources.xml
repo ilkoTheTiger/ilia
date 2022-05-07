@@ -9,7 +9,7 @@
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="TimeToFly$Test__TimeToFly_web_tests" uuid="41f5f4d7-fd62-4daf-97e4-372151331f01">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>cf1c7d28-aa70-4cf4-a16f-d285d686912a</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\User\AppData\Local\JetBrains\PyCharm2021.3\coverage\TimeToFly$Test__TimeToFly_web_tests.coverage</jdbc-url>
@@ -19,6 +19,15 @@
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
         </library>
       </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Django default" uuid="4c025803-5b1c-451c-a8c0-24b25de55560">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/../timetofly-project/TimeToFly/TimeToFly/settings.py</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/timetofly_db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>

@@ -6,6 +6,8 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth import login, logout
 from TimeToFly.auth_app.models import Profile
 from django import forms
+from TimeToFly.web.validators import validate_only_letters
+from django.core.validators import MinLengthValidator
 
 UserModel = get_user_model()
 
@@ -14,8 +16,14 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
     IMAGE_UPLOAD_DIR = 'images/'
     MAX_FILE_SIZE_IN_MEGABYTES=1
 
-    first_name = forms.CharField(max_length=25)
-    last_name = forms.CharField(max_length=25)
+    first_name = forms.CharField(max_length=25,
+                                 validators=(validate_only_letters,
+                                             MinLengthValidator(2),))
+    last_name = forms.CharField(max_length=25,
+                                validators=(validate_only_letters,
+                                            MinLengthValidator(2),
+                                ),
+                                            )
 
     class Meta:
         model = UserModel
